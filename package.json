@@ -6,14 +6,17 @@
   "scripts": {
     "test": "gulp test",
     "start": "gulp",
-    "build": "gulp" 
+    "build": "gulp"
   },
   "repository": {
     "type": "git",
     "url": "git+https://ryan102694@bitbucket.org/ryan102694/node-game-framework.git"
   },
   "dependencies": {
+    "@azure/identity": "^4.13.1",
+    "@azure/keyvault-secrets": "^4.11.2",
     "add": "^2.0.6",
+    "applicationinsights": "^3.15.1",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.0",
     "babel-polyfill": "^6.26.0",
