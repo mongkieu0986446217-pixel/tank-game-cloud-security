@@ -41,7 +41,7 @@ jobs:
     # PHẦN 2: TRIỂN KHAI CÁC CÔNG CỤ BẢO MẬT CHUỖI CUNG ỨNG
     # =========================================================================
 
-# Bước 4: Quét lỗ hổng an ninh bằng TRIVY
+    # Bước 4: Quét lỗ hổng an ninh bằng TRIVY
     - name: Run Trivy Vulnerability Scanner
       uses: aquasecurity/trivy-action@master
       env:
@@ -53,13 +53,6 @@ jobs:
         exit-code: '0'
         ignore-unfixed: true
         severity: 'CRITICAL,HIGH'
-
-    # Bước 4.5: Upload Báo cáo Trivy HTML lên GitHub Artifacts
-    - name: Upload Trivy Scan Report
-      uses: actions/upload-artifact@v4
-      with:
-        name: tank-game-trivy-report
-        path: trivy-report.html
 
     # Bước 5: Xuất danh mục linh kiện phần mềm (SBOM) bằng Syft
     - name: Generate SBOM using Syft
@@ -80,6 +73,14 @@ jobs:
     # PHẦN 3: BÀN GIAO SẢN PHẨM VÀ KÝ SỐ CHỐNG GIẢ MẠO (COSIGN)
     # =========================================================================
 
+    # Đăng nhập tươi lại Docker ngay trước khi Push
+    - name: Re-login to ACR
+      uses: azure/docker-login@v2
+      with:
+        login-server: acrtankgame2026.azurecr.io
+        username: ${{ secrets.ACR_USERNAME }}
+        password: ${{ secrets.ACR_PASSWORD }}
+
     # Bước 7: Push Image lên Azure ACR
     - name: Push Image to ACR
       run: |
@@ -88,6 +89,13 @@ jobs:
     # Bước 8: Cài đặt công cụ Cosign
     - name: Install Cosign
       uses: sigstore/cosign-installer@v3.5.0
+
+    # Bước 8.5: Đăng nhập Cosign vào ACR để có quyền đẩy chữ ký
+    - name: Log in Cosign to ACR
+      run: |
+        cosign login acrtankgame2026.azurecr.io \
+          -u "${{ secrets.ACR_USERNAME }}" \
+          -p "${{ secrets.ACR_PASSWORD }}"
 
     # Bước 9: Đóng dấu ký số điện tử (Sign)
     - name: Sign the published Docker image
@@ -116,7 +124,7 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-# Bước 11: Deploy tự động lên Azure Container App
+    # Bước 11: Deploy tự động lên Azure Container App
     - name: Deploy to Azure Container App
       uses: azure/container-apps-deploy-action@v2
       with:
@@ -127,7 +135,7 @@ jobs:
         resourceGroup: Demo-Cloud-Native
         containerAppEnvironment: managedEnvironment-DemoCloudNative-97a2
         imageToDeploy: acrtankgame2026.azurecr.io/tank-game:latest
-        targetPort: 8080        # <-- ĐÃ SỬA: Đổi từ 80 thành 8080
+        targetPort: 8080
         ingress: external
 
     # Bước 12: Kiểm tra trạng thái hoạt động của Container App
