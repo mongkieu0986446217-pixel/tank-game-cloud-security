@@ -1,3 +1,18 @@
+
+// ==================== AZURE INTEGRATION ====================
+require('dotenv').config();
+const appInsights = require('applicationinsights');
+
+if (process.env.APPLICATIONINSIGHTS_CONNECTION_STRING) {
+    appInsights.setup(process.env.APPLICATIONINSIGHTS_CONNECTION_STRING)
+        .setAutoDependencyCorrelation(true)
+        .setAutoCollectRequests(true)
+        .setAutoCollectPerformance(true, true)
+        .setAutoCollectExceptions(true)
+        .start();
+    console.log("--> Azure Application Insights: Active");
+}
+// ==========================================================
 /**
  * 1. BASIC SERVER SETUP
  * First set up everything necessary for serving up the index.html page
