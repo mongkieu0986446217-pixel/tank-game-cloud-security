@@ -30,7 +30,8 @@ var winston = require("winston");
 winston.level = "debug";
 
 // Import application config
-var config = require("../../config.json");
+// Code mới (chỉ lùi 1 cấp thư mục):
+var config = require("../config.json");
 
 //for allowing page to access static resources, in our index.html we can use /js for all our javascript files.
 app.use("/js", express.static(path.join(__dirname, "../client/js")));
