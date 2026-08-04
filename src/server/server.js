@@ -1,4 +1,3 @@
-
 // ==================== AZURE INTEGRATION ====================
 require('dotenv').config();
 const appInsights = require('applicationinsights');
@@ -13,11 +12,6 @@ if (process.env.APPLICATIONINSIGHTS_CONNECTION_STRING) {
     console.log("--> Azure Application Insights: Active");
 }
 // ==========================================================
-/**
- * 1. BASIC SERVER SETUP
- * First set up everything necessary for serving up the index.html page
- * with its static assets
- */
 
 "use strict";
 
@@ -29,26 +23,19 @@ var path = require("path");
 var winston = require("winston");
 winston.level = "debug";
 
-// Import application config
-// Code mới (chỉ lùi 1 cấp thư mục):
-var config = require("../config.json");
+// 1. Config nằm ở root (Lùi 2 cấp)
+var config = require("../../config.json");
 
-//for allowing page to access static resources, in our index.html we can use /js for all our javascript files.
-app.use("/js", express.static(path.join(__dirname, "../client/js")));
-app.use("/css", express.static(path.join(__dirname, "../client/css")));
-app.use("/img", express.static(path.join(__dirname, "../client/img")));
-app.use("/html", express.static(path.join(__dirname, "../client/html")));
+// 2. Static files nằm ở root (Lùi 2 cấp)
+app.use("/js", express.static(path.join(__dirname, "../../client/js")));
+app.use("/css", express.static(path.join(__dirname, "../../client/css")));
+app.use("/img", express.static(path.join(__dirname, "../../client/img")));
+app.use("/html", express.static(path.join(__dirname, "../../client/html")));
 
-/**
- * Serve index.html when the user visits the site in their browser
- */
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "/../client/index.html"));
+  res.sendFile(path.join(__dirname, "../../client/index.html"));
 });
 
-/**
- * Start listening, I'm not sure how the details of this are working
- */
 var port = process.env.PORT || 8080;
 http.listen(port, "0.0.0.0", function () {
   winston.log("debug", "listening on port:" + port);
@@ -57,13 +44,12 @@ http.listen(port, "0.0.0.0", function () {
 /**
  * 2. GAME VARIABLES
  */
-
-//import game related classes
-var ClientData = require("./lib/clientData");
-var util = require("./lib/util");
-var QuadtreeManager = require("./lib/quadtreeManager");
-var SpatialHashManager = require("./lib/spacialHashManager");
-var GameLogicService = require("./lib/gameLogicService");
+// 3. Nếu lib/ nằm ở src/lib/ thì lùi 1 cấp (../lib/):
+var ClientData = require("../lib/clientData");
+var util = require("../lib/util");
+var QuadtreeManager = require("../lib/quadtreeManager");
+var SpatialHashManager = require("../lib/spacialHashManager");
+var GameLogicService = require("../lib/gameLogicService");
 var Heap = require("heap");
 
 /**
