@@ -49,7 +49,7 @@ app.get("/", function (req, res) {
  * Start listening, I'm not sure how the details of this are working
  */
 var port = process.env.PORT || 8080;
-http.listen(port, function () {
+http.listen(port, "0.0.0.0", function () {
   winston.log("debug", "listening on port:" + port);
 });
 
