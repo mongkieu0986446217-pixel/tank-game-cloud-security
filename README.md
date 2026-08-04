@@ -4,7 +4,7 @@
 ### NOTE ###
 Project is not actively maintained. Working with **npm 6.10.3, node v12.10.0, and gulp 4.0.0**. There are also dependencies which Github tells me have vulnerabilities. I'm open to fixes!
 
-
+ 
 ## Description ##
 
 * Game written in Node.js using WebSockets (socket.io) and HTML5 canvas.
