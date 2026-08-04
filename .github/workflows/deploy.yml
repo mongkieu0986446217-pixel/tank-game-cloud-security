@@ -135,7 +135,7 @@ jobs:
         resourceGroup: Demo-Cloud-Native
         containerAppEnvironment: managedEnvironment-DemoCloudNative-97a2
         imageToDeploy: acrtankgame2026.azurecr.io/tank-game:latest
-        targetPort: 80
+        targetPort: 8080
         ingress: external
 
     # Bước 12: Kiểm tra trạng thái hoạt động của Container App
