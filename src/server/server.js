@@ -48,7 +48,7 @@ app.get("/", function (req, res) {
 /**
  * Start listening, I'm not sure how the details of this are working
  */
-var port = process.env.PORT || config.port;
+var port = process.env.PORT || 8080;
 http.listen(port, function () {
   winston.log("debug", "listening on port:" + port);
 });
