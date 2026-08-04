@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["node", "bin/server/server.js"]
+CMD ["node", "src/bin/server.js"]
