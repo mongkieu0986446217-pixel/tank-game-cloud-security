@@ -1,20 +1,14 @@
-FROM node:18-slim
-
+FROM node:18-alpine
 WORKDIR /usr/src/app
 
+# Coppy file khai bao thu vien
 COPY package*.json ./
 
-# Cài đặt thư viện và chặn script ngầm tự chạy
-RUN npm install --ignore-scripts
+# CAI DAT TOAN BO THU VIEN (Thieu dong nay app se crash)
+RUN npm install
 
+# Copy toan bo code con lai
 COPY . .
 
-# Biên dịch toàn bộ code tĩnh sang thư mục bin/
-RUN npx gulp build-server || npx gulp
-
-ENV PORT=8080
-
 EXPOSE 8080
-
-# Chạy server Node thuần
-CMD ["node", "bin/server/server.js"]
+CMD ["npm", "start"]
