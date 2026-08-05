@@ -1,10 +1,9 @@
-FROM node:18-alpine
+FROM node:14-alpine
 WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-# Thêm cờ --legacy-peer-deps vào cuối dòng này
-RUN npm install --legacy-peer-deps
+RUN npm install --unsafe-perm
 
 COPY . .
 
