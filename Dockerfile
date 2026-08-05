@@ -4,17 +4,17 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-# Dùng --ignore-scripts để CHẶN BẮT BUỘC nodemon không được tự chạy ngầm
-RUN npm install --ignore-scripts
+# Cài đặt tất cả dependencies (bao gồm gulp, babel, webpack)
+RUN npm install
 
 COPY . .
 
-# Chỉ biên dịch file tĩnh ra /bin/server/ và /bin/client/
+# Chỉ gọi đúng task 'build-server' để biên dịch code ra /bin rồi thoát (không treo)
 RUN npx gulp build-server
 
 ENV PORT=8080
 
 EXPOSE 8080
 
-# Khởi chạy ứng dụng bằng node thuần
+# Chạy server bằng node nguyên bản
 CMD ["node", "bin/server/server.js"]
