@@ -8,9 +8,11 @@ RUN npm install
 
 COPY . .
 
+# Bước quan trọng bị thiếu: Biên dịch code tạo ra thư mục bin/
+RUN npx gulp build || npm run build || npx gulp
+
 ENV PORT=8080
 
 EXPOSE 8080
 
-# Chạy thẳng file server.js nằm trong thư mục bin/server/
-CMD ["node", "bin/server/server.js"]
+CMD ["npm", "start"]
