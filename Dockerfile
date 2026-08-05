@@ -4,17 +4,17 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-# Cài đặt tất cả dependencies (bao gồm gulp, babel, webpack)
-RUN npm install
+# Cài đặt thư viện và chặn script ngầm tự chạy
+RUN npm install --ignore-scripts
 
 COPY . .
 
-# Chỉ gọi đúng task 'build-server' để biên dịch code ra /bin rồi thoát (không treo)
-RUN npx gulp build-server
+# Biên dịch toàn bộ code tĩnh sang thư mục bin/
+RUN npx gulp build-server || npx gulp
 
 ENV PORT=8080
 
 EXPOSE 8080
 
-# Chạy server bằng node nguyên bản
+# Chạy server Node thuần
 CMD ["node", "bin/server/server.js"]
