@@ -4,19 +4,17 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
+# Cài đặt toàn bộ thư viện
 RUN npm install
 
 COPY . .
 
-# 1. Cài đặt gulp-cli toàn cục để build
-RUN npm install -g gulp-cli
-
-# 2. Tạo thư mục bin/ trước khi chạy server
-RUN gulp build || npm run build || gulp
+# Biên dịch ra thư mục bin/
+RUN npx gulp build || npx gulp
 
 ENV PORT=8080
 
 EXPOSE 8080
 
-# 3. CHẠY THẲNG BẰNG NODE (tuyệt đối không dùng npm start/nodemon)
+# Chạy thẳng bằng node
 CMD ["node", "bin/server/server.js"]
