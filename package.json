@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://ryan102694@bitbucket.org/ryan102694/node-game-framework.git"
   },
- "dependencies": {
+"dependencies": {
     "dotenv": "^16.4.5",
     "@azure/data-tables": "^13.3.2",
     "@azure/identity": "^4.13.1",
