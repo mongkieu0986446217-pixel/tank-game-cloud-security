@@ -12,7 +12,8 @@
     "type": "git",
     "url": "git+https://ryan102694@bitbucket.org/ryan102694/node-game-framework.git"
   },
-  "dependencies": {
+ "dependencies": {
+    "dotenv": "^16.4.5",
     "@azure/data-tables": "^13.3.2",
     "@azure/identity": "^4.13.1",
     "@azure/keyvault-secrets": "^4.11.2",
@@ -41,7 +42,7 @@
     "webpack": "^3.0.0",
     "webpack-stream": "^3.2.0",
     "winston": "^2.3.1"
-  },
+  }
   "devDependencies": {},
   "author": "Ryan Pelletier",
   "license": "ISC",
