@@ -8,11 +8,15 @@ RUN npm install
 
 COPY . .
 
-# Bước quan trọng bị thiếu: Biên dịch code tạo ra thư mục bin/
-RUN npx gulp build || npm run build || npx gulp
+# 1. Cài đặt gulp-cli toàn cục để build
+RUN npm install -g gulp-cli
+
+# 2. Tạo thư mục bin/ trước khi chạy server
+RUN gulp build || npm run build || gulp
 
 ENV PORT=8080
 
 EXPOSE 8080
 
+# 3. CHẠY THẲNG BẰNG NODE (tuyệt đối không dùng npm start/nodemon)
 CMD ["node", "bin/server/server.js"]
