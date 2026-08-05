@@ -12,4 +12,5 @@ ENV PORT=8080
 
 EXPOSE 8080
 
-CMD ["node", "src/server/server.js"]
+# Chạy thẳng file server.js nằm trong thư mục bin/server/
+CMD ["node", "bin/server/server.js"]
