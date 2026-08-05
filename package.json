@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "gulp test",
-    "start": "gulp",
-    "build": "gulp"
+    "start": "node bin/server/server.js",
+    "build": "gulp build"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,10 @@
     "chai": "^3.5.0",
     "express": "^4.15.3",
     "growl": "^1.10.5",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^6.1.2",
+    "gulp-mocha": "^2.2.0",
+    "gulp-nodemon": "^2.5.0",
     "heap": "^0.2.6",
     "mocha": "^2.5.3",
     "simple-quadtree": "^0.1.3",
@@ -38,12 +42,7 @@
     "webpack-stream": "^3.2.0",
     "winston": "^2.3.1"
   },
-  "devDependencies": {
-    "gulp": "^4.0.0",
-    "gulp-babel": "^6.1.2",
-    "gulp-mocha": "^2.2.0",
-    "gulp-nodemon": "^2.5.0"
-  },
+  "devDependencies": {},
   "author": "Ryan Pelletier",
   "license": "ISC",
   "homepage": "https://bitbucket.org/ryan102694/node-game-framework#readme"
