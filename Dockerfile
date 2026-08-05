@@ -8,6 +8,9 @@ RUN npm install
 
 COPY . .
 
+# Thêm dòng này để cố định port cho Node.js app
+ENV PORT=8080
+
 EXPOSE 8080
 
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
