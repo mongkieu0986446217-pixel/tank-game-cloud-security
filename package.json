@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "A game written in JavaScript, uses WebSockets and HTML5 canvas. Runs in Node!",
   "main": "app.js",
-  "scripts": {
+"scripts": {
     "test": "gulp test",
     "start": "node bin/server/server.js",
-    "build": "gulp build"
+    "build": "gulp build-server"
   },
   "repository": {
     "type": "git",
