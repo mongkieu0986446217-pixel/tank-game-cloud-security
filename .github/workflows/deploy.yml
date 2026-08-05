@@ -26,9 +26,9 @@ jobs:
     - name: Log in to Azure Container Registry (ACR)
       uses: azure/docker-login@v2
       with:
-        login-server: acrtankgame2026.azurecr.io
-        username: ${{ secrets.ACR_USERNAME }}
-        password: ${{ secrets.ACR_PASSWORD }}
+          login-server: acrtankgame2026.azurecr.io
+          username: acrtankgame2026
+          password: ${{ secrets.REGISTRY_PASSWORD }}
 
     # ---------------------------------------------------------------------
     # Bước 3: Đóng gói Docker Image
