@@ -45,8 +45,8 @@ jobs:
     - name: Run Trivy Vulnerability Scanner
       uses: aquasecurity/trivy-action@master
       env:
-        TRIVY_USERNAME: ${{ secrets.ACR_USERNAME }}
-        TRIVY_PASSWORD: ${{ secrets.ACR_PASSWORD }}
+        TRIVY_USERNAME: acrtankgame2026
+        TRIVY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
       with:
         image-ref: 'acrtankgame2026.azurecr.io/tank-game:latest'
         format: 'table'
@@ -78,8 +78,8 @@ jobs:
       uses: azure/docker-login@v2
       with:
         login-server: acrtankgame2026.azurecr.io
-        username: ${{ secrets.ACR_USERNAME }}
-        password: ${{ secrets.ACR_PASSWORD }}
+        username: acrtankgame2026
+        password: ${{ secrets.REGISTRY_PASSWORD }}
 
     # Bước 7: Push Image lên Azure ACR
     - name: Push Image to ACR
@@ -94,8 +94,8 @@ jobs:
     - name: Log in Cosign to ACR
       run: |
         cosign login acrtankgame2026.azurecr.io \
-          -u "${{ secrets.ACR_USERNAME }}" \
-          -p "${{ secrets.ACR_PASSWORD }}"
+          -u "acrtankgame2026" \
+          -p "${{ secrets.REGISTRY_PASSWORD }}"
 
     # Bước 9: Đóng dấu ký số điện tử (Sign)
     - name: Sign the published Docker image
@@ -129,8 +129,8 @@ jobs:
       uses: azure/container-apps-deploy-action@v2
       with:
         acrName: acrtankgame2026
-        acrUsername: ${{ secrets.ACR_USERNAME }}
-        acrPassword: ${{ secrets.ACR_PASSWORD }}
+        acrUsername: acrtankgame2026
+        acrPassword: ${{ secrets.REGISTRY_PASSWORD }}
         containerAppName: tank-game-app
         resourceGroup: Demo-Cloud-Native
         containerAppEnvironment: managedEnvironment-DemoCloudNative-97a2
