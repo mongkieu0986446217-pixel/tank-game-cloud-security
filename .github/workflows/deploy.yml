@@ -23,7 +23,7 @@ jobs:
     # ---------------------------------------------------------------------
     # Bước 2: Đăng nhập an toàn vào Azure ACR (acrtankgame2026)
     # ---------------------------------------------------------------------
-    - name: Log in to Azure Container Registry (ACR)
+    - name: Re-login to ACR
       uses: azure/docker-login@v2
       with:
           login-server: acrtankgame2026.azurecr.io
