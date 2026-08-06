@@ -3,14 +3,16 @@ FROM node:18-slim
 WORKDIR /usr/src/app
 
 COPY package*.json ./
+
+# Cài đủ dependency (giữ scripts — cần cho một số package build)
 RUN npm install
 
 COPY . .
 
-# Build server + client vào thư mục bin/
-RUN npx gulp build-server build-client || npm run build
+# Chỉ build, không chạy server / watch
+RUN npx gulp build-server build-client
 
+ENV PORT=8080
 EXPOSE 8080
 
-# Chạy file đã build (không phụ thuộc gulp watch)
 CMD ["node", "bin/server/server.js"]
